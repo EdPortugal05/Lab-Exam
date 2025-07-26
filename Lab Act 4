@@ -1,0 +1,45 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        //Declare
+        decimal[] prices = new decimal[7];
+        decimal maxGain = 0;
+        int maxDay = 1;
+
+        //input
+        Console.WriteLine("enter stock prices for 7 days:");
+
+        for (int i = 0; i < 7; i++)
+        {
+            Console.Write("Day " + (i + 1) + ": ");
+            while (!decimal.TryParse(Console.ReadLine(), out prices[i]))
+                Console.Write("Invalid. try again: ");
+        }
+        //gains
+        Console.WriteLine("\n% gains Compared to previous day:");
+
+        for (int i = 0; i < 7; i++)
+        {
+            if (i == 0)
+            {
+                Console.WriteLine("day 1: 0.00% (N/A)");
+            }
+            else
+            {
+                decimal gain = (prices[i] - prices[i - 1]) / prices[i - 1] * 100;
+                Console.WriteLine("Day " + (i + 1) + ": " + gain.ToString("0.00") + "%");
+
+                if (gain > maxGain)
+                {
+                    maxGain = gain;
+                    maxDay = i + 1;
+                }
+            }
+        }
+        //Outpug
+        Console.WriteLine("\nHighest Gain: Day " + maxDay + " (" + maxGain.ToString("0.00") + "%)");
+    }
+}
