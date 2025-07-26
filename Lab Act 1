@@ -1,0 +1,52 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace HelloWold
+{
+    public static class Program
+    {
+        public static void Main()
+        {
+            // create array
+            string[] names = new string[10];
+            int[] scores = new int[10];
+
+            Console.WriteLine("enter Names and Scores for 10 Students:");
+
+            // input From user
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Write($"enter name of the student {i + 1}: ");
+                names[i] = Console.ReadLine();
+
+                Console.Write($"enter score of {names[i]}: ");
+                while (!int.TryParse(Console.ReadLine(), out scores[i]))
+                {
+                    Console.Write("invalid input. please enter a valid Number: ");
+                }
+            }
+
+            // Combining names and scores
+            var students = new List<(string Name, int Score)>();
+            for (int i = 0; i < 10; i++)
+            {
+                students.Add((names[i], scores[i]));
+            }
+
+            // descending and ascending
+            var sorted = students
+                .OrderByDescending(s => s.Score)
+                .ThenBy(s => s.Name)
+                .ToList();
+
+            // Prints top 3 students
+            Console.WriteLine("\nTop 3 Students:");
+            for (int rank = 0; rank < 3 && rank < sorted.Count; rank++)
+            {
+                Console.WriteLine($"Rank {rank + 1}: {sorted[rank].Name} - {sorted[rank].Score}");
+                Console.ReadKey();
+            }
+        }
+    }
+}
