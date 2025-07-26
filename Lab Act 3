@@ -1,0 +1,69 @@
+using System;
+
+using System.Linq;
+
+using System.Collections.Generic;
+
+
+
+namespace HelloWold;
+
+
+
+public static class Program
+{
+    public static void Main()
+
+    {
+        //declare 
+        int[] ages = new int[20];
+        int total = 0;
+        int min = 200;
+        int max = 0;
+
+        int bracket1 = 0; // <18
+        int bracket2 = 0; // 18-35
+        int bracket3 = 0; // 36-60
+        int bracket4 = 0; // >60
+
+        for (int i = 0; i < 20; i++)
+        {
+            Console.Write("Enter age #" + (i + 1) + ": ");
+            int age = int.Parse(Console.ReadLine());
+            ages[i] = age;
+            total += age;
+
+            if (age < min)
+                min = age;
+            if (age > max)
+                max = age;
+
+            if (age < 18)
+                bracket1++;
+            else if (age <= 35)
+                bracket2++;
+            else if (age <= 60)
+                bracket3++;
+            else
+                bracket4++;
+        }
+
+        double avg = (double)total / 20;
+
+        //prints distribution and the average
+        Console.WriteLine("\nSurvey Analysis Result");
+        Console.WriteLine("Average Age: " + avg);
+        Console.WriteLine("Youngest: " + min);
+        Console.WriteLine("Oldest: " + max);
+        Console.WriteLine("\nAge Bracket Distribution:");
+        Console.WriteLine("-------------------------------");
+        Console.WriteLine("Bracket  | Count");
+        Console.WriteLine("< 18     | " + bracket1);
+        Console.WriteLine("18 - 35  | " + bracket2);
+        Console.WriteLine("36 - 60  | " + bracket3);
+        Console.WriteLine("> 60     | " + bracket4);
+
+        Console.ReadKey();
+    }
+
+}
