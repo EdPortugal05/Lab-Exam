@@ -1,0 +1,81 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace HelloWold;
+
+public static class Program
+{
+    public static void Main()
+    {
+        string[] names = new string[5];
+        DateTime[] dates = new DateTime[5];
+        int count = 0;
+
+        while (count < 5)
+        {
+            //Input name of the event
+            Console.Write("event name: ");
+            string name = Console.ReadLine();
+
+            //date of event
+            Console.Write("date (mm/dd/yyyy): ");
+            string input = Console.ReadLine();
+            DateTime date;
+
+            if (!DateTime.TryParse(input, out date))
+            {
+                Console.WriteLine("Invalid date.");
+                continue;
+            }
+
+            bool same = false;
+            for (int i = 0; i < count; i++)
+            {
+                if (dates[i] == date)
+                {
+                    same = true;
+                    break;
+                }
+            }
+
+            //encounters same date
+            if (same)
+            {
+                Console.WriteLine("Date already exists.");
+                continue;
+            }
+
+            names[count] = name;
+            dates[count] = date;
+            count++;
+        }
+
+        // Sort date
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = i + 1; j < 5; j++)
+            {
+                if (dates[i] > dates[j])
+                {
+                    var tempDate = dates[i];
+                    dates[i] = dates[j];
+                    dates[j] = tempDate;
+
+                    var tempName = names[i];
+                    names[i] = names[j];
+                    names[j] = tempName;
+                }
+            }
+        }
+
+        //prints output
+        Console.WriteLine("\nevents by date:");
+        for (int i = 0; i < 5; i++)
+        {
+            Console.WriteLine(dates[i].ToString("mm/dd/yyyy") + " - " + names[i]);
+
+            Console.ReadKey();
+        }
+    }
+}
