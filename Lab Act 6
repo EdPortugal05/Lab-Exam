@@ -1,0 +1,50 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace HelloWold;
+
+public static class Program
+{
+    public static void Main()
+    {
+
+        string[] names = new string[15];
+
+        Console.WriteLine("enter 15 names:");
+        for (int i = 0; i < 15; i++)
+        {
+            names[i] = Console.ReadLine();
+        }
+
+        string[] uniqueNames = new string[15];
+        int count = 0;
+
+        for (int i = 0; i < 15; i++)
+        {
+            bool isDuplicate = false;
+            for (int j = 0; j < count; j++)
+            {
+                if (names[i].ToLower() == uniqueNames[j].ToLower())
+                {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+
+            if (!isDuplicate)
+            {
+                uniqueNames[count] = names[i];
+                count++;
+            }
+        }
+
+        Array.Sort(uniqueNames, 0, count);
+
+        Console.WriteLine("\nunique and sorted names:");
+        for (int i = 0; i < count; i++)
+        {
+            Console.WriteLine(uniqueNames[i]);
+        }
+    }
+}
