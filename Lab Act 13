@@ -1,0 +1,32 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace HelloWold;
+
+public static class Program
+{
+    public static void Main()
+    {
+
+        int[] seconds = new int[10];
+        
+        Console.WriteLine("enter 10 time durations in secs:");
+        for (int i = 0; i < 10; i++)
+        {
+            seconds[i] = int.Parse(Console.ReadLine());
+        }
+        
+        Console.WriteLine("\nseconds HH:MM:SS");
+        Console.WriteLine("------------------");
+        
+        for (int i = 0; i < 10; i++)
+        {
+            int hours = seconds[i] / 3600;
+            int minutes = (seconds[i] % 3600) / 60;
+            int secs = seconds[i] % 60;
+            
+            Console.WriteLine($"{seconds[i]}\t{hours:D2}:{minutes:D2}:{secs:D2}");
+        }
+    }
+}
