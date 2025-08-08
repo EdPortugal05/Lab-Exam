@@ -1,0 +1,43 @@
+using System;
+
+using System.Linq;
+
+using System.Collections.Generic;
+
+
+
+namespace HelloWold;
+
+
+
+public static class Program
+{
+    public static void Main()
+
+    {
+
+        double[] transactions = new double[20];
+
+        Console.WriteLine("Enter 20 transactions amounts:");
+        for (int i = 0; i < 20; i++)
+        {
+            transactions[i] = double.Parse(Console.ReadLine());
+        }
+
+        Console.WriteLine("\nLarge transactions (>10000):");
+        double total = 0;
+
+        for (int i = 0; i < 20; i++)
+        {
+            if (transactions[i] > 10000)
+            {
+                Console.WriteLine(transactions[i].ToString("0.00"));
+                total += transactions[i];
+            }
+        }
+
+        Console.WriteLine($"Total: {total.ToString("0.00")}");
+
+        Console.ReadKey();
+    }
+}
