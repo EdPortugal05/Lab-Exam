@@ -1,0 +1,46 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace HelloWold;
+
+public static class Program
+{
+    public static void Main()
+    {
+
+        int[] numbers = new int[10];
+        
+        Console.WriteLine("enter ten numbers:");
+        for (int i = 0; i < 10; i++)
+        {
+            numbers[i] = int.Parse(Console.ReadLine());
+        }
+        
+        Console.Write("enter simple expression: ");
+        string expression = Console.ReadLine();
+        
+        int[] results = new int[10];
+        
+        for (int i = 0; i < 10; i++)
+        {
+            int x = numbers[i];
+            
+            
+            if (expression == "x*2")
+                results[i] = x * 2;
+            else if (expression == "x+5")
+                results[i] = x + 5;
+            else if (expression == "x%3")
+                results[i] = x % 3;
+            else
+                results[i] = x; 
+        }
+        
+        Console.WriteLine("\nOriginal evaluated");
+        for (int i = 0; i < 10; i++)
+        {
+            Console.WriteLine($"{numbers[i]}\t\t{results[i]}");
+        }
+    }
+}
