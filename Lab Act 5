@@ -1,0 +1,49 @@
+using System;
+
+using System.Linq;
+
+using System.Collections.Generic;
+
+
+
+namespace HelloWold;
+
+
+
+public static class Program
+{
+    public static void Main()
+
+    {
+
+        int[] numbers = new int[10];
+
+        Console.WriteLine("Enter ten numbers:");
+        for (int i = 0; i < 10; i++)
+        {
+            numbers[i] = int.Parse(Console.ReadLine());
+        }
+
+        Console.Write("enter shift amount: ");
+        int shift = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("\nOriginal array:");
+        for (int i = 0; i < 10; i++)
+        {
+            Console.Write(numbers[i] + " ");
+        }
+
+        int[] shifted = new int[10];
+        for (int i = 0; i < 10; i++)
+        {
+            shifted[(i + shift) % 10] = numbers[i];
+        }
+
+        Console.WriteLine("\nshifted array:");
+        for (int i = 0; i < 10; i++)
+        {
+            Console.Write(shifted[i] + " ");
+        }
+    }
+}
+
