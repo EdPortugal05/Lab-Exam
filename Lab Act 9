@@ -1,0 +1,125 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace HelloWold;
+
+public static class Program
+{
+    public static void Main()
+    {
+        
+        char[] cards = { 'A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 
+                        'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H' };
+        bool[] shown = new bool[16];
+        int pairsFound = 0;
+        
+        
+        Random rand = new Random();
+        for (int i = 0; i < cards.Length; i++)
+        {
+            int j = rand.Next(cards.Length);
+            char temp = cards[i];
+            cards[i] = cards[j];
+            cards[j] = temp;
+        }
+        
+        Console.WriteLine("Welcome to Simple Memory Game!");
+        Console.WriteLine("Match the pairs of letters A-H");
+        Console.WriteLine("Enter positions 0-15 to flip cards");
+        
+        while (pairsFound < 8)
+        {
+            
+            Console.WriteLine("\nCurrent Board:");
+            for (int i = 0; i < cards.Length; i++)
+            {
+                if (shown[i])
+                    Console.Write(cards[i] + " ");
+                else
+                    Console.Write(i + " "); // Show position numbers
+                
+                if ((i + 1) % 4 == 0) // New line every 4 cards
+                    Console.WriteLine();
+            }
+            
+            
+            Console.Write("Pick first card (0-15): ");
+            int card1 = GetCard(shown);
+            shown[card1] = true;
+            
+            
+            DisplayBoard(cards, shown);
+            
+           
+            Console.Write("Pick second card (0-15): ");
+            int card2 = GetCard(shown);
+            shown[card2] = true;
+            
+            
+            DisplayBoard(cards, shown);
+            
+            
+            if (cards[card1] == cards[card2])
+            {
+                Console.WriteLine("Match found!");
+                pairsFound++;
+            }
+            else
+            {
+                Console.WriteLine("No match. Cards hidden again.");
+                shown[card1] = false;
+                shown[card2] = false;
+            }
+            
+            Console.WriteLine($"Pairs found: {pairsFound}/8");
+            Console.WriteLine("Press Enter to continue...");
+            Console.ReadLine();
+            Console.Clear();
+        }
+        
+        Console.WriteLine("You won! Great job!");
+    }
+    
+    static void DisplayBoard(char[] cards, bool[] shown)
+    {
+        Console.WriteLine("\nCurrent Board:");
+        for (int i = 0; i < cards.Length; i++)
+        {
+            if (shown[i])
+                Console.Write(cards[i] + " ");
+            else
+                Console.Write(". ");
+                
+            if ((i + 1) % 4 == 0)
+                Console.WriteLine();
+        }
+    }
+    
+    static int GetCard(bool[] shown)
+    {
+        while (true)
+        {
+            if (int.TryParse(Console.ReadLine(), out int position))
+            {
+                if (position >= 0 && position < 16)
+                {
+                    if (!shown[position])
+                        return position;
+                    else
+                        Console.Write("Card already shown. Pick another: ");
+                }
+                else
+                {
+                    Console.Write("Number must be 0-15. Try again: ");
+                }
+            }
+            else
+            {
+                Console.Write("Invalid number. Enter 0-15: ");
+                
+                Console.ReadKey();
+            }
+        }
+    }
+}
